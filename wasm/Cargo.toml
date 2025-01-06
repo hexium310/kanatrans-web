@@ -1,0 +1,44 @@
+[package]
+name = "kanatrans-wasm"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.93"
+futures = "0.3.31"
+http = "1.2.0"
+serde = "1.0.204"
+serde_json = "1.0.133"
+thiserror = "1.0.63"
+url = "2.5.4"
+
+[dependencies.tokio]
+version = "1.41.1"
+features = ["rt", "macros"]
+
+[features]
+vendored = ["adapter/vendored"]
+
+[dependencies.adapter]
+git = "https://github.com/hexium310/kanatrans"
+tag = "kanatrans/0.2.4"
+features = ["vendored"]
+
+[dependencies.domain]
+git = "https://github.com/hexium310/kanatrans"
+tag = "kanatrans/0.2.4"
+
+[dependencies.phoneme]
+git = "https://github.com/hexium310/kanatrans"
+tag = "kanatrans/0.2.4"
+
+[dependencies.service]
+git = "https://github.com/hexium310/kanatrans"
+tag = "kanatrans/0.2.4"
+
+[profile.release]
+codegen-units = 1
+opt-level = "s"
+debug = false
+strip = true
+lto = true
