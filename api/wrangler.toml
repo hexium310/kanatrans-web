@@ -1,0 +1,6 @@
+name = "kanatrans-web"
+main = "src/index.ts"
+compatibility_date = "2024-11-30"
+
+[env.development]
+main = "src/index.dev.ts"

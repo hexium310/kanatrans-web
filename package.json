@@ -1,0 +1,17 @@
+{
+  "name": "kanatrans-wasm",
+  "exports": {
+    "./debug/kanatrans-wasm.wasm": "./target/wasm32-wasip1/debug/kanatrans-wasm.wasm",
+    "./kanatrans-wasm.wasm": "./target/wasm32-wasip1/release/kanatrans-wasm.wasm"
+  },
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "api"
+  ],
+  "scripts": {
+    "build:wasm:dev": "cargo build --target wasm32-wasip1",
+    "build:wasm:release": "cargo build --target wasm32-wasip1 --release"
+  },
+  "packageManager": "yarn@4.5.3"
+}

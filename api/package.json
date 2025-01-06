@@ -1,0 +1,15 @@
+{
+  "name": "api",
+  "private": true,
+  "scripts": {
+    "dev:api": "wrangler dev --local --env development"
+  },
+  "dependencies": {
+    "kanatrans-wasm": "workspace:^"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241230.0",
+    "@cloudflare/workers-wasi": "^0.0.5",
+    "wrangler": "^3.99.0"
+  }
+}
