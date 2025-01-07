@@ -3,7 +3,9 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "bundler",
-    "lib": ["esnext"]
+    "lib": ["esnext"],
+    "noEmit": true,
+    "incremental": true,
   },
   "exclude": [
     "node_modules/"
