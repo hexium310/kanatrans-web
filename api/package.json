@@ -2,7 +2,8 @@
   "name": "api",
   "private": true,
   "scripts": {
-    "dev:api": "wrangler dev --local --env development"
+    "dev:api": "wrangler dev --local --env development",
+    "lint:tsc:api": "tsc"
   },
   "dependencies": {
     "kanatrans-wasm": "workspace:^"
