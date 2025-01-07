@@ -2,7 +2,9 @@
   "name": "api",
   "private": true,
   "scripts": {
-    "dev:api": "wrangler dev --local --env development"
+    "dev:api": "wrangler dev --local --env development",
+    "lint:tsc:api": "tsc",
+    "lint:biome:api": "biome check ."
   },
   "dependencies": {
     "kanatrans-wasm": "workspace:^"

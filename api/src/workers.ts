@@ -1,14 +1,11 @@
 import { WASI } from '@cloudflare/workers-wasi';
 
+// biome-ignore lint/suspicious/noEmptyInterface:
 export interface Env {}
 
 export const workers = (wasmModule: WebAssembly.Module) => {
   return {
-    async fetch(
-      request: Request,
-      _env: Env,
-      ctx: ExecutionContext
-    ): Promise<Response> {
+    async fetch(request: Request, _env: Env, ctx: ExecutionContext): Promise<Response> {
       const stdout = new TransformStream<Uint8Array, Uint8Array>();
       const stderr = new TransformStream<Uint8Array, Uint8Array>();
       const wasi = new WASI({
@@ -19,6 +16,7 @@ export const workers = (wasmModule: WebAssembly.Module) => {
       });
 
       const instance = new WebAssembly.Instance(wasmModule, {
+        // biome-ignore lint/style/useNamingConvention:
         wasi_snapshot_preview1: wasi.wasiImport,
       });
 
@@ -34,16 +32,16 @@ export const workers = (wasmModule: WebAssembly.Module) => {
           const response = JSON.parse(new TextDecoder().decode(error.value));
 
           return Response.json(response, { status: response.error.status });
-        } catch (e) {
+        } catch (_e) {
           return Response.json({ error: { message: 'Failed to parse result as JSON' } }, { status: 400 });
         }
       }
 
       try {
-        const response = JSON.parse(new TextDecoder().decode(result?.value))
+        const response = JSON.parse(new TextDecoder().decode(result?.value));
 
         return Response.json(response);
-      } catch (e) {
+      } catch (_e) {
         return Response.json({ error: { message: 'Failed to parse result as JSON' } }, { status: 400 });
       }
     },
