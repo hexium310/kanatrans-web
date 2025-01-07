@@ -1,4 +1,4 @@
-name = "kanatrans-web"
+name = "kanatrans"
 main = "src/index.ts"
 compatibility_date = "2024-11-30"
 
