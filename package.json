@@ -2,7 +2,8 @@
   "name": "kanatrans-wasm",
   "exports": {
     "./debug/kanatrans-wasm.wasm": "./target/wasm32-wasip1/debug/kanatrans-wasm.wasm",
-    "./kanatrans-wasm.wasm": "./target/wasm32-wasip1/release/kanatrans-wasm.wasm"
+    "./kanatrans-wasm.wasm": "./target/wasm32-wasip1/release/kanatrans-wasm.wasm",
+    "./biome": "./biome.json"
   },
   "type": "module",
   "private": true,
@@ -12,8 +13,12 @@
   "scripts": {
     "build:wasm:dev": "cargo build --target wasm32-wasip1",
     "build:wasm:release": "cargo build --target wasm32-wasip1 --release",
-    "lint": "run lint:tsc",
+    "lint": "run lint:biome && run lint:tsc",
+    "lint:biome": "run lint:biome:api",
     "lint:tsc": "run lint:tsc:api"
   },
-  "packageManager": "yarn@4.5.3"
+  "packageManager": "yarn@4.5.3",
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4"
+  }
 }
