@@ -35,10 +35,3 @@ tag = "kanatrans/0.2.4"
 [dependencies.service]
 git = "https://github.com/hexium310/kanatrans"
 tag = "kanatrans/0.2.4"
-
-[profile.release]
-codegen-units = 1
-opt-level = "s"
-debug = false
-strip = true
-lto = true
