@@ -1,0 +1,63 @@
+name: CI
+
+permissions:
+  checks: write
+  contents: read
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Set up rust-toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - name: Cache dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
+      - name: Test
+        run: |
+          cargo test
+      - name: Run clippy
+        uses: sksat/action-clippy@v1.1.0
+        with:
+          reporter: github-check
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    env:
+      WASI_SDK_PATH: /opt/wasi-sdk/
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Set up rust-toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-wasip1
+      - name: Set up WASI SDK
+        uses: ./.github/actions/set-up-wasi-sdk
+        with:
+          path: ${{ env.WASI_SDK_PATH }}
+      - name: Cache dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
+      - name: Build
+        run: |
+          cargo build --target=wasm32-wasip1 --release

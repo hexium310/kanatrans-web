@@ -1,0 +1,20 @@
+name: Set up WASI SDK
+
+description: Set up WASI SDK
+
+inputs:
+  path:
+    description: A location where wasi-sdk will be installed
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Install WASI SDK
+      shell: bash
+      env:
+        WASI_SDK_PATH: ${{ inputs.path }}
+      run: |
+        mkdir -p "$WASI_SDK_PATH"
+        curl -LOJ https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-25/wasi-sdk-25.0-x86_64-linux.tar.gz
+        tar xzf wasi-sdk-25.0-x86_64-linux.tar.gz --strip-components=1 -C "$WASI_SDK_PATH"
