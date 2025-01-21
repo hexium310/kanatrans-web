@@ -31,7 +31,7 @@ jobs:
         with:
           cache-on-failure: true
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache --check-cache
+        run: yarn install --immutable
       - name: Build
         run: yarn build:wasm:release
       - name: Deploy
