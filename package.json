@@ -1,5 +1,6 @@
 {
   "name": "kanatrans-wasm",
+  "version": "0.1.0",
   "exports": {
     "./debug/kanatrans-wasm.wasm": "./target/wasm32-wasip1/debug/kanatrans-wasm.wasm",
     "./kanatrans-wasm.wasm": "./target/wasm32-wasip1/release/kanatrans-wasm.wasm",
