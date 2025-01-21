@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-anyhow = "1.0.93"
+anyhow = "1.0.95"
 futures = "0.3.31"
 http = "1.2.0"
 serde = "1.0.204"
