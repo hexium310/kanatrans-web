@@ -12,7 +12,7 @@ jobs:
     name: Build
     runs-on: ubuntu-22.04
     env:
-      VERSION: ${{{ github.ref_name }}}
+      WASI_SDK_PATH: /opt/wasi-sdk/
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -30,9 +30,12 @@ jobs:
         uses: Swatinem/rust-cache@v2
         with:
           cache-on-failure: true
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache --check-cache
       - name: Build
-        run: |
-          cargo build --target=wasm32-wasip1 --release
+        run: yarn build:wasm:release
+      - name: Deploy
+        run: yarn deploy:api
       - name: release
         uses: softprops/action-gh-release@v2
         with:
