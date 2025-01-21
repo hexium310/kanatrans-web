@@ -11,8 +11,8 @@ on:
   pull_request:
 
 jobs:
-  test:
-    name: Test
+  wasm-test:
+    name: Wasm Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -36,6 +36,27 @@ jobs:
           reporter: github-check
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
+  api-test:
+    name: API Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Enable corepack
+        run: corepack enable
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+          check-latest: true
+          cache: yarn
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache --check-cache
+      - name: Lint
+        run: yarn lint
+
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -46,6 +67,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: true
+      - name: Enable corepack
+        run: corepack enable
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+          check-latest: true
+          cache: yarn
       - name: Set up rust-toolchain
         uses: dtolnay/rust-toolchain@stable
         with:
@@ -58,6 +87,9 @@ jobs:
         uses: Swatinem/rust-cache@v2
         with:
           cache-on-failure: true
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache --check-cache
       - name: Build
         run: |
-          cargo build --target=wasm32-wasip1 --release
+          yarn build:wasm:release
+          yarn build:api:release

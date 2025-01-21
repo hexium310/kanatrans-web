@@ -3,6 +3,9 @@
   "private": true,
   "scripts": {
     "dev:api": "wrangler dev --local --env development",
+    "build:api:dev": "wrangler deploy --dry-run --env development",
+    "build:api:release": "wrangler deploy --dry-run",
+    "deploy:api": "wrangler deploy",
     "lint:tsc:api": "tsc",
     "lint:biome:api": "biome check ."
   },
