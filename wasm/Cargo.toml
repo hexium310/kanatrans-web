@@ -35,3 +35,10 @@ tag = "kanatrans/0.2.4"
 [dependencies.service]
 git = "https://github.com/hexium310/kanatrans"
 tag = "kanatrans/0.2.4"
+
+[dev-dependencies.criterion]
+version = "0.5.1"
+
+[[bench]]
+name = "bench"
+harness = false
