@@ -1,6 +1,6 @@
 use std::{
     env,
-    io::{stderr, stdout, BufWriter, Write},
+    io::{stderr, stdout, BufWriter},
 };
 
 use adapter::processor::{conversion_table::ConversionTable, lex_lookup::LexLookup};
@@ -12,9 +12,11 @@ use service::{
     arpabet::{ArpabetService, ArpabetServiceInterface},
     katakana::{KatakanaService, KatakanaServiceInterface},
 };
+use service_response::ServiceResponse;
 use url::Url;
 
 mod error;
+mod service_response;
 
 #[derive(Debug, Serialize)]
 struct ErrorResponse {
@@ -62,23 +64,22 @@ async fn main() {
     match result {
         Ok(output) => {
             let stdout = stdout();
-            let mut buffer = BufWriter::new(stdout.lock());
+            let buffer = BufWriter::new(stdout.lock());
 
-            writeln!(buffer, "{}", &output).unwrap();
+            serde_json::to_writer(buffer, &output).unwrap();
         },
         Err(err) => {
             let stderr = stderr();
-            let mut buffer = BufWriter::new(stderr.lock());
+            let buffer = BufWriter::new(stderr.lock());
 
             let error_resposne = ErrorResponse { error: err.into() };
-            let error_resposne = serde_json::to_string(&error_resposne).unwrap();
 
-            writeln!(buffer, "{}", &error_resposne).unwrap();
+            serde_json::to_writer(buffer, &error_resposne).unwrap();
         },
     }
 }
 
-async fn execute(url: Url) -> std::result::Result<String, ErrorKind> {
+async fn execute(url: Url) -> std::result::Result<Box<dyn ServiceResponse>, ErrorKind> {
     let mut path_segments = url.path_segments().ok_or(ErrorKind::Http(StatusCode::NOT_FOUND))?;
 
     match path_segments.next() {
@@ -95,7 +96,7 @@ async fn execute(url: Url) -> std::result::Result<String, ErrorKind> {
                 .await
                 .map_err(|e| ErrorKind::InternalError { source: e.into() })?;
 
-            serde_json::to_string(&arpabet).map_err(|e| ErrorKind::InternalError { source: e.into() })
+            Ok(Box::new(arpabet))
         },
         Some("katakana") => {
             let (_, pronunciation) = url
@@ -109,7 +110,7 @@ async fn execute(url: Url) -> std::result::Result<String, ErrorKind> {
                 .await
                 .map_err(|e| ErrorKind::InternalError { source: e.into() })?;
 
-            serde_json::to_string(&katakana).map_err(|e| ErrorKind::InternalError { source: e.into() })
+            Ok(Box::new(katakana))
         },
         _ => Err(ErrorKind::Http(StatusCode::NOT_FOUND)),
     }
