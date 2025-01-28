@@ -28,21 +28,17 @@ export const workers = (wasmModule: WebAssembly.Module) => {
       ]);
 
       if (error.value.byteLength > 0) {
-        try {
-          const response = JSON.parse(new TextDecoder().decode(error.value));
+        const message = new TextDecoder().decode(error.value);
 
-          return Response.json(response, { status: response.error.status });
-        } catch (_e) {
-          return Response.json({ error: { message: 'Failed to parse result as JSON' } }, { status: 400 });
-        }
+        return Response.json({ error: { message } }, { status: 500 });
       }
 
       try {
         const response = JSON.parse(new TextDecoder().decode(result?.value));
 
-        return Response.json(response);
+        return Response.json(response, { status: response.error?.status ?? 200 });
       } catch (_e) {
-        return Response.json({ error: { message: 'Failed to parse result as JSON' } }, { status: 400 });
+        return Response.json({ error: { message: 'Failed to parse result as JSON' } }, { status: 500 });
       }
     },
   };
