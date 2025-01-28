@@ -1,13 +1,13 @@
 use std::{
     env,
-    io::{stderr, stdout, BufWriter},
+    io::{stdout, BufWriter},
 };
 
 use adapter::processor::{conversion_table::ConversionTable, lex_lookup::LexLookup};
 use error::ErrorKind;
+use error_response::ErrorResponse;
 use futures::{future, TryFutureExt};
 use http::StatusCode;
-use serde::Serialize;
 use service::{
     arpabet::{ArpabetService, ArpabetServiceInterface},
     katakana::{KatakanaService, KatakanaServiceInterface},
@@ -16,40 +16,8 @@ use service_response::ServiceResponse;
 use url::Url;
 
 mod error;
+mod error_response;
 mod service_response;
-
-#[derive(Debug, Serialize)]
-struct ErrorResponse {
-    error: ErrorResponseBody,
-}
-
-#[derive(Debug, Serialize)]
-struct ErrorResponseBody {
-    status: u16,
-    message: String,
-}
-
-impl From<ErrorKind> for ErrorResponseBody {
-    fn from(error_kind: ErrorKind) -> Self {
-        match error_kind {
-            ErrorKind::Http(status_code) => match status_code {
-                StatusCode::NOT_FOUND => ErrorResponseBody {
-                    status: status_code.into(),
-                    message: "Not Found".to_owned(),
-                },
-                StatusCode::BAD_REQUEST => ErrorResponseBody {
-                    status: status_code.into(),
-                    message: "Bad Request".to_owned(),
-                },
-                _ => unreachable!(),
-            },
-            ErrorKind::InternalError { source } => ErrorResponseBody {
-                status: StatusCode::INTERNAL_SERVER_ERROR.into(),
-                message: source.to_string(),
-            },
-        }
-    }
-}
 
 #[tokio::main(flavor = "current_thread")]
 async fn main() {
@@ -61,22 +29,15 @@ async fn main() {
     let result = future::ready(url)
         .and_then(|url| async move { execute(url).await })
         .await;
-    match result {
-        Ok(output) => {
-            let stdout = stdout();
-            let buffer = BufWriter::new(stdout.lock());
+    let output = match result {
+        Ok(output) => output,
+        Err(err) => Box::new(ErrorResponse { error: err.into() }),
+    };
 
-            serde_json::to_writer(buffer, &output).unwrap();
-        },
-        Err(err) => {
-            let stderr = stderr();
-            let buffer = BufWriter::new(stderr.lock());
+    let stdout = stdout();
+    let buffer = BufWriter::new(stdout.lock());
 
-            let error_resposne = ErrorResponse { error: err.into() };
-
-            serde_json::to_writer(buffer, &error_resposne).unwrap();
-        },
-    }
+    serde_json::to_writer(buffer, &output).unwrap();
 }
 
 async fn execute(url: Url) -> std::result::Result<Box<dyn ServiceResponse>, ErrorKind> {

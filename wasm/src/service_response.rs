@@ -1,7 +1,4 @@
-use service::{
-    arpabet::Arpabet,
-    katakana::Katakana,
-};
+use service::{arpabet::Arpabet, katakana::Katakana};
 
 pub(crate) trait ServiceResponse: erased_serde::Serialize {}
 
