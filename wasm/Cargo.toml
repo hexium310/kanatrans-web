@@ -28,7 +28,7 @@ version = "1.0.137"
 
 [dependencies.service]
 git = "https://github.com/hexium310/kanatrans"
-tag = "kanatrans/0.2.4"
+tag = "kanatrans/0.2.5"
 
 [dependencies.thiserror]
 version = "2.0.11"
