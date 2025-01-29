@@ -8,7 +8,7 @@ version = "0.0.0"
 source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.4#4b6d5ad8577b69cb28114be2b404b36d2824e28a"
 dependencies = [
  "anyhow",
- "domain",
+ "domain 0.0.0 (git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.4)",
  "flite",
  "itertools",
  "phoneme",
@@ -148,6 +148,15 @@ dependencies = [
 name = "domain"
 version = "0.0.0"
 source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.4#4b6d5ad8577b69cb28114be2b404b36d2824e28a"
+dependencies = [
+ "anyhow",
+ "serde",
+]
+
+[[package]]
+name = "domain"
+version = "0.0.0"
+source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.5#10b3c1124be3fb197965e4bb9546f5d752146aa6"
 dependencies = [
  "anyhow",
  "serde",
@@ -481,7 +490,7 @@ version = "0.1.1"
 dependencies = [
  "adapter",
  "anyhow",
- "domain",
+ "domain 0.0.0 (git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.5)",
  "erased-serde",
  "futures",
  "http",
@@ -718,7 +727,7 @@ version = "0.0.0"
 source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.4#4b6d5ad8577b69cb28114be2b404b36d2824e28a"
 dependencies = [
  "anyhow",
- "domain",
+ "domain 0.0.0 (git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.4)",
  "serde",
  "thiserror 1.0.69",
  "tracing",

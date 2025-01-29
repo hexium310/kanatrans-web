@@ -26,7 +26,7 @@ features = ["vendored"]
 
 [dependencies.domain]
 git = "https://github.com/hexium310/kanatrans"
-tag = "kanatrans/0.2.4"
+tag = "kanatrans/0.2.5"
 
 [dependencies.erased-serde]
 version = "0.4.5"
