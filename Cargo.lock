@@ -5,14 +5,14 @@ version = 4
 [[package]]
 name = "adapter"
 version = "0.0.0"
-source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.4#4b6d5ad8577b69cb28114be2b404b36d2824e28a"
+source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.5#10b3c1124be3fb197965e4bb9546f5d752146aa6"
 dependencies = [
  "anyhow",
  "domain",
  "flite",
- "itertools",
+ "itertools 0.14.0",
  "phoneme",
- "thiserror 1.0.69",
+ "thiserror",
 ]
 
 [[package]]
@@ -68,16 +68,14 @@ dependencies = [
 
 [[package]]
 name = "bindgen"
-version = "0.70.1"
+version = "0.71.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f49d8fed880d473ea71efb9bf597651e77201bdd4893efe54c9e5d65ae04ce6f"
+checksum = "5f58bf3d7db68cfbac37cfc485a8d711e87e064c3d0fe0435b92f7a407f9d6b3"
 dependencies = [
  "bitflags",
  "cexpr",
  "clang-sys",
- "itertools",
- "log",
- "prettyplease",
+ "itertools 0.13.0",
  "proc-macro2",
  "quote",
  "regex",
@@ -147,7 +145,7 @@ dependencies = [
 [[package]]
 name = "domain"
 version = "0.0.0"
-source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.4#4b6d5ad8577b69cb28114be2b404b36d2824e28a"
+source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.5#10b3c1124be3fb197965e4bb9546f5d752146aa6"
 dependencies = [
  "anyhow",
  "serde",
@@ -172,7 +170,7 @@ dependencies = [
 [[package]]
 name = "flite"
 version = "0.0.0"
-source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.4#4b6d5ad8577b69cb28114be2b404b36d2824e28a"
+source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.5#10b3c1124be3fb197965e4bb9546f5d752146aa6"
 dependencies = [
  "flite-sys",
 ]
@@ -180,7 +178,7 @@ dependencies = [
 [[package]]
 name = "flite-src"
 version = "0.0.0"
-source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.4#4b6d5ad8577b69cb28114be2b404b36d2824e28a"
+source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.5#10b3c1124be3fb197965e4bb9546f5d752146aa6"
 dependencies = [
  "copy_dir",
 ]
@@ -188,7 +186,7 @@ dependencies = [
 [[package]]
 name = "flite-sys"
 version = "0.0.0"
-source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.4#4b6d5ad8577b69cb28114be2b404b36d2824e28a"
+source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.5#10b3c1124be3fb197965e4bb9546f5d752146aa6"
 dependencies = [
  "bindgen",
  "flite-src",
@@ -470,6 +468,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "itertools"
+version = "0.14.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2b192c782037fadd9cfa75548310488aabdbf3d2da73885b31bd0abd03351285"
+dependencies = [
+ "either",
+]
+
+[[package]]
 name = "itoa"
 version = "1.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -487,7 +494,7 @@ dependencies = [
  "serde",
  "serde_json",
  "service",
- "thiserror 2.0.11",
+ "thiserror",
  "tokio",
  "url",
 ]
@@ -513,12 +520,6 @@ name = "litemap"
 version = "0.7.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4ee93343901ab17bd981295f2cf0026d4ad018c7c31ba84549a4ddbb47a45104"
-
-[[package]]
-name = "log"
-version = "0.4.22"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a7a70ba024b9dc04c27ea2f0c0548feb474ec5c54bba33a7f72f873a39d07b24"
 
 [[package]]
 name = "memchr"
@@ -575,10 +576,10 @@ checksum = "e3148f5046208a5d56bcfc03053e3ca6334e51da8dfb19b6cdc8b306fae3283e"
 [[package]]
 name = "phoneme"
 version = "0.0.0"
-source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.4#4b6d5ad8577b69cb28114be2b404b36d2824e28a"
+source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.5#10b3c1124be3fb197965e4bb9546f5d752146aa6"
 dependencies = [
  "anyhow",
- "thiserror 1.0.69",
+ "thiserror",
  "tracing",
 ]
 
@@ -593,16 +594,6 @@ name = "pin-utils"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8b870d8c151b6f2fb93e84a13146138f05d02ed11c7e7c54f8826aaaf7c9f184"
-
-[[package]]
-name = "prettyplease"
-version = "0.2.25"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "64d1ec885c64d0457d564db4ec299b2dae3f9c02808b8ad9c3a089c591b18033"
-dependencies = [
- "proc-macro2",
- "syn",
-]
 
 [[package]]
 name = "proc-macro2"
@@ -659,9 +650,9 @@ checksum = "719b953e2095829ee67db738b3bfa9fa368c94900df327b3f07fe6e794d2fe1f"
 
 [[package]]
 name = "rustc-hash"
-version = "1.1.0"
+version = "2.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "08d43f7aa6b08d49f382cde6a7982047c3426db949b1424bc4b7ec9ae12c6ce2"
+checksum = "c7fb8039b3032c191086b10f11f319a6e99e1e82889c5cc6046f515c9db1d497"
 
 [[package]]
 name = "ryu"
@@ -713,12 +704,12 @@ dependencies = [
 [[package]]
 name = "service"
 version = "0.0.0"
-source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.4#4b6d5ad8577b69cb28114be2b404b36d2824e28a"
+source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.5#10b3c1124be3fb197965e4bb9546f5d752146aa6"
 dependencies = [
  "anyhow",
  "domain",
  "serde",
- "thiserror 1.0.69",
+ "thiserror",
  "tracing",
 ]
 
@@ -773,31 +764,11 @@ dependencies = [
 
 [[package]]
 name = "thiserror"
-version = "1.0.69"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b6aaf5339b578ea85b50e080feb250a3e8ae8cfcdff9a461c9ec2904bc923f52"
-dependencies = [
- "thiserror-impl 1.0.69",
-]
-
-[[package]]
-name = "thiserror"
 version = "2.0.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d452f284b73e6d76dd36758a0c8684b1d5be31f92b89d07fd5822175732206fc"
 dependencies = [
- "thiserror-impl 2.0.11",
-]
-
-[[package]]
-name = "thiserror-impl"
-version = "1.0.69"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4fee6c4efc90059e10f81e6d42c60a18f76588c3d74cb83a0b242a2b6c7504c1"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn",
+ "thiserror-impl",
 ]
 
 [[package]]
