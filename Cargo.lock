@@ -11,7 +11,7 @@ dependencies = [
  "domain",
  "flite",
  "itertools",
- "phoneme",
+ "phoneme 0.0.0 (git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.4)",
  "thiserror 1.0.69",
 ]
 
@@ -485,7 +485,7 @@ dependencies = [
  "erased-serde",
  "futures",
  "http",
- "phoneme",
+ "phoneme 0.0.0 (git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.5)",
  "serde",
  "serde_json",
  "service",
@@ -581,6 +581,16 @@ source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.4#4b6d5
 dependencies = [
  "anyhow",
  "thiserror 1.0.69",
+ "tracing",
+]
+
+[[package]]
+name = "phoneme"
+version = "0.0.0"
+source = "git+https://github.com/hexium310/kanatrans?tag=kanatrans%2F0.2.5#10b3c1124be3fb197965e4bb9546f5d752146aa6"
+dependencies = [
+ "anyhow",
+ "thiserror 2.0.11",
  "tracing",
 ]
 
