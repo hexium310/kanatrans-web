@@ -12,29 +12,18 @@ serde_json = "1.0.137"
 thiserror = "2.0.11"
 url = "2.5.4"
 
-[dependencies.tokio]
-version = "1.43.0"
-features = ["rt", "macros"]
-
-[features]
-vendored = ["adapter/vendored"]
-
 [dependencies.adapter]
 git = "https://github.com/hexium310/kanatrans"
 tag = "kanatrans/0.2.4"
 features = ["vendored"]
 
-[dependencies.domain]
-git = "https://github.com/hexium310/kanatrans"
-tag = "kanatrans/0.2.4"
-
 [dependencies.erased-serde]
 version = "0.4.5"
-
-[dependencies.phoneme]
-git = "https://github.com/hexium310/kanatrans"
-tag = "kanatrans/0.2.4"
 
 [dependencies.service]
 git = "https://github.com/hexium310/kanatrans"
 tag = "kanatrans/0.2.4"
+
+[dependencies.tokio]
+version = "1.43.0"
+features = ["rt", "macros"]

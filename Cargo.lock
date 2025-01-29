@@ -481,11 +481,9 @@ version = "0.1.1"
 dependencies = [
  "adapter",
  "anyhow",
- "domain",
  "erased-serde",
  "futures",
  "http",
- "phoneme",
  "serde",
  "serde_json",
  "service",
