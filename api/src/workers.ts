@@ -1,4 +1,6 @@
 import { WASI } from '@cloudflare/workers-wasi';
+import { ProblemDocument } from 'http-problem-details';
+import type { ProblemDocumentOptions } from 'http-problem-details/dist/ProblemDocument';
 
 // biome-ignore lint/suspicious/noEmptyInterface:
 export interface Env {}
@@ -9,7 +11,7 @@ export const workers = (wasmModule: WebAssembly.Module) => {
       const stdout = new TransformStream<Uint8Array, Uint8Array>();
       const stderr = new TransformStream<Uint8Array, Uint8Array>();
       const wasi = new WASI({
-        args: [request.url],
+        args: ['', request.url],
         stdin: request.body,
         stdout: stdout.writable,
         stderr: stderr.writable,
@@ -22,24 +24,46 @@ export const workers = (wasmModule: WebAssembly.Module) => {
 
       ctx.waitUntil(wasi.start(instance));
 
-      const [result, error] = await Promise.all([
+      const [wasiOutput, wasiError] = await Promise.all([
         stdout.readable.getReader().read(),
         stderr.readable.getReader().read(),
       ]);
 
-      if (error.value.byteLength > 0) {
-        const message = new TextDecoder().decode(error.value);
+      if (wasiError.value.byteLength > 0) {
+        const message = new TextDecoder().decode(wasiError.value);
 
-        return Response.json({ error: { message } }, { status: 500 });
+        return responseFromProblemDetails({
+          status: 500,
+          detail: message,
+        });
       }
 
       try {
-        const response = JSON.parse(new TextDecoder().decode(result?.value));
+        const wasiResponse = new TextDecoder().decode(wasiOutput?.value).split('\n');
+        const status = Number.parseInt(wasiResponse[0], 10);
+        const body = JSON.parse(wasiResponse[1]);
 
-        return Response.json(response, { status: response.error?.status ?? 200 });
-      } catch (_e) {
-        return Response.json({ error: { message: 'Failed to parse result as JSON' } }, { status: 500 });
+        if (Object.hasOwn(body, 'status')) {
+          return responseFromProblemDetails(body);
+        }
+
+        return Response.json(body, { status });
+      } catch (e) {
+        return responseFromProblemDetails({
+          status: 500,
+          detail: e instanceof SyntaxError ? e.message : 'Unexpected error',
+        });
       }
     },
   };
 };
+
+function responseFromProblemDetails(fields: ProblemDocumentOptions): Response {
+  const problemDocument = new ProblemDocument(fields);
+
+  const status = problemDocument.status;
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/problem+json');
+
+  return Response.json(problemDocument, { status, headers });
+}
