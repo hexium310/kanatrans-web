@@ -338,9 +338,10 @@ name = "kanatrans-wasm"
 version = "0.1.1"
 dependencies = [
  "adapter",
+ "axum",
  "http",
  "http-body-util",
- "problem_details 0.7.0",
+ "problem_details",
  "serde",
  "serde_json",
  "service",
@@ -449,18 +450,6 @@ name = "pin-utils"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8b870d8c151b6f2fb93e84a13146138f05d02ed11c7e7c54f8826aaaf7c9f184"
-
-[[package]]
-name = "problem_details"
-version = "0.7.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7ee2055bf7d8f34bd11bf85388b878bf244256015f1ed290b6b717c0e97bb478"
-dependencies = [
- "http",
- "http-serde",
- "serde",
- "serde_json",
-]
 
 [[package]]
 name = "problem_details"
@@ -617,7 +606,7 @@ dependencies = [
  "anyhow",
  "axum",
  "domain",
- "problem_details 0.8.0",
+ "problem_details",
  "serde",
  "serde_json",
  "thiserror",

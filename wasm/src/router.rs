@@ -29,11 +29,15 @@ impl Router {
         let status = response.status();
         let body = match response.into_body().collect().await {
             Ok(body) => body,
-            Err(err) => return Output::Failure(ProblemDetails::from_status_code(status).with_detail(err.to_string()))
+            Err(err) => return Output::Failure(ProblemDetails::from_status_code(StatusCode::INTERNAL_SERVER_ERROR).with_detail(err.to_string()))
         };
 
-        if !status.is_success() {
-            return Output::Failure(serde_json::from_slice::<ProblemDetails>(&body.to_bytes()).expect("Invalid kanatrans error response as ProblemDetails"))
+        if status == StatusCode::NOT_FOUND {
+            return Output::Failure(ProblemDetails::from_status_code(StatusCode::NOT_FOUND));
+        }
+
+        if status.is_server_error() {
+            return Output::Failure(serde_json::from_slice::<ProblemDetails>(&body.to_bytes()).expect("Invalid kanatrans error response as ProblemDetails"));
         }
 
         Output::Success(body.to_bytes())
@@ -49,3 +53,6 @@ impl Router {
         Ok(response)
     }
 }
+
+#[cfg(test)]
+mod tests;

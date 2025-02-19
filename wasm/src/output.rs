@@ -5,6 +5,7 @@ use problem_details::ProblemDetails;
 use serde::Serialize;
 use service::Bytes;
 
+#[derive(Debug, PartialEq, Eq)]
 pub(crate) enum Output {
     Success(Bytes),
     Failure(ProblemDetails),
