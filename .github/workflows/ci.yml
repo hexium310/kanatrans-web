@@ -10,10 +10,16 @@ on:
       - master
   pull_request:
 
+env:
+  CARGO_BUILD_TARGET: wasm32-wasip1
+  WASI_SDK_PATH: /opt/wasi-sdk/
+
 jobs:
   wasm-test:
     name: Wasm Test
     runs-on: ubuntu-latest
+    env:
+      CARGO_TARGET_WASM32_WASIP1_RUNNER: wasmtime
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -22,7 +28,14 @@ jobs:
       - name: Set up rust-toolchain
         uses: dtolnay/rust-toolchain@stable
         with:
+          targets: ${{ env.CARGO_BUILD_TARGET }}
           components: clippy
+      - name: Set up wasmtime
+        uses: bytecodealliance/actions/wasmtime/setup@v1
+      - name: Set up WASI SDK
+        uses: ./.github/actions/set-up-wasi-sdk
+        with:
+          path: ${{ env.WASI_SDK_PATH }}
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
         with:
@@ -60,8 +73,6 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    env:
-      WASI_SDK_PATH: /opt/wasi-sdk/
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -78,7 +89,7 @@ jobs:
       - name: Set up rust-toolchain
         uses: dtolnay/rust-toolchain@stable
         with:
-          targets: wasm32-wasip1
+          targets: ${{ env.CARGO_BUILD_TARGET }}
       - name: Set up WASI SDK
         uses: ./.github/actions/set-up-wasi-sdk
         with:
