@@ -7,8 +7,8 @@ use crate::{output::Output, Router};
 
 fn axum_router() -> AxumRouter {
     AxumRouter::new()
-        .route("/success", routing::get(|| async { "success" }))
-        .route("/failure", routing::get(|| async { ProblemDetails::from_status_code(StatusCode::INTERNAL_SERVER_ERROR) }))
+        .route("/success", routing::get(async || { "success" }))
+        .route("/failure", routing::get(async || { ProblemDetails::from_status_code(StatusCode::INTERNAL_SERVER_ERROR) }))
 }
 
 #[tokio::test(flavor = "current_thread")]
