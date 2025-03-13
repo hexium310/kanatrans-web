@@ -3,6 +3,8 @@ name = "kanatrans-wasm"
 version = "0.1.1"
 edition = "2024"
 
+[dependencies]
+
 [dependencies.adapter]
 git = "https://github.com/hexium310/kanatrans"
 tag = "kanatrans/0.2.6"

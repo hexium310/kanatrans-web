@@ -4,7 +4,7 @@ use problem_details::ProblemDetails;
 use service::{Body, Bytes, Router as AxumRouter};
 use tower::ServiceExt;
 
-use crate::output::Output;
+use crate::rest::RestOutput;
 
 pub(crate) struct Router {
     inner: AxumRouter,
@@ -15,32 +15,32 @@ impl Router {
         Self { inner: router }
     }
 
-    pub async fn apply(&self, uri: impl Into<String>) -> Output {
+    pub async fn apply(&self, uri: impl Into<String>) -> RestOutput {
         let response = match self.request(uri).await {
             Ok(response) => response,
             Err(err) if err.is::<InvalidUri>() => {
-                return Output::Failure(ProblemDetails::from_status_code(StatusCode::BAD_REQUEST).with_detail(err.to_string()))
+                return RestOutput::Failure(ProblemDetails::from_status_code(StatusCode::BAD_REQUEST).with_detail(err.to_string()))
             },
             Err(err) => {
-                return Output::Failure(ProblemDetails::from_status_code(StatusCode::INTERNAL_SERVER_ERROR).with_detail(err.to_string()))
+                return RestOutput::Failure(ProblemDetails::from_status_code(StatusCode::INTERNAL_SERVER_ERROR).with_detail(err.to_string()))
             },
         };
 
         let status = response.status();
         let body = match response.into_body().collect().await {
             Ok(body) => body,
-            Err(err) => return Output::Failure(ProblemDetails::from_status_code(StatusCode::INTERNAL_SERVER_ERROR).with_detail(err.to_string()))
+            Err(err) => return RestOutput::Failure(ProblemDetails::from_status_code(StatusCode::INTERNAL_SERVER_ERROR).with_detail(err.to_string()))
         };
 
         if status == StatusCode::NOT_FOUND {
-            return Output::Failure(ProblemDetails::from_status_code(StatusCode::NOT_FOUND));
+            return RestOutput::Failure(ProblemDetails::from_status_code(StatusCode::NOT_FOUND));
         }
 
         if status.is_server_error() {
-            return Output::Failure(serde_json::from_slice::<ProblemDetails>(&body.to_bytes()).expect("Invalid kanatrans error response as ProblemDetails"));
+            return RestOutput::Failure(serde_json::from_slice::<ProblemDetails>(&body.to_bytes()).expect("Invalid kanatrans error response as ProblemDetails"));
         }
 
-        Output::Success(body.to_bytes())
+        RestOutput::Success(body.to_bytes())
     }
 
     pub async fn request(&self, uri: impl Into<String>) -> Result<Response<Body>, http::Error> {
