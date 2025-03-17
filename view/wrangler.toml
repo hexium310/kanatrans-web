@@ -1,0 +1,15 @@
+workers_dev = true
+name = "kanatrans-view"
+compatibility_date = "2025-03-10"
+main = "./build/server/index.js"
+assets = { directory = "./build/client/" }
+
+[[services]]
+binding = "KANATRANS_WORKER"
+service = "kanatrans"
+entrypoint = "KanatransWorkerEntrypoint"
+
+[[env.development.services]]
+binding = "KANATRANS_WORKER"
+service = "kanatrans-development"
+entrypoint = "KanatransWorkerEntrypoint"

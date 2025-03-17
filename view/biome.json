@@ -1,0 +1,10 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "extends": ["kanatrans-wasm/biome"],
+  "files": {
+    "ignore": ["worker-configuration.d.ts"]
+  },
+  "formatter": {
+    "enabled": false
+  }
+}

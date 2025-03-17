@@ -9,17 +9,21 @@
   "type": "module",
   "private": true,
   "workspaces": [
-    "api"
+    "api",
+    "view"
   ],
   "scripts": {
     "build:wasm:dev": "cargo build --target wasm32-wasip1",
     "build:wasm:release": "cargo build --target wasm32-wasip1 --release",
-    "lint": "run lint:biome && run lint:tsc",
-    "lint:biome": "run lint:biome:api",
-    "lint:tsc": "run lint:tsc:api"
+    "dev": "concurrently -n API,VIEW \"yarn run dev:api\" \"yarn run dev:view\"",
+    "start": "concurrently -n API,VIEW \"yarn run dev:api\" \"yarn run build:view && yarn run start:view\"",
+    "lint": "concurrently -m 1 -n LINT,TYPECHECK \"yarn run lint:biome\" \"yarn run lint:typecheck\"",
+    "lint:biome": "concurrently -m 1 -n API,VIEW \"yarn run lint:biome:api\" \"run lint:biome:view\"",
+    "lint:typecheck": "concurrently -m 1 -n API,VIEW \"run lint:typecheck:api\" \"run lint:typecheck:view\""
   },
   "packageManager": "yarn@4.5.3",
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4"
+    "@biomejs/biome": "^1.9.4",
+    "concurrently": "^9.1.2"
   }
 }

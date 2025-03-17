@@ -1,5 +1,16 @@
+# Rust
 target/
+
+# Node
 node_modules/
 .yarn/
 dist/
+*.tsbuildinfo
+
+# Cloudflare
+.mf
 .wrangler/
+
+# React Router
+.react-router/
+build/
