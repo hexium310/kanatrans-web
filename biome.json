@@ -23,6 +23,9 @@
       "all": true,
       "correctness": {
         "useImportExtensions": "off"
+      },
+      "style": {
+        "noDefaultExport": "off"
       }
     }
   },
@@ -30,6 +33,6 @@
     "formatter": {
       "quoteStyle": "single"
     },
-    "globals": ["ExecutionContext"]
+    "globals": ["ExecutionContext", "ExportedHandler"]
   }
 }
