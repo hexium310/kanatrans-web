@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, isRouteErrorResponse } from "react-router";
 
 import type { Route } from "./+types/root";
+import classes from "./root.module.css";
 
 import '@mantine/core/styles.css';
 
@@ -49,11 +50,11 @@ export const ErrorBoundary = memo(({ error }: Route.ErrorBoundaryProps) => {
   }
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
+    <main className={ classes.main }>
       <h1>{ message }</h1>
       <p>{ details }</p>
       { stack && (
-        <pre className="w-full p-4 overflow-x-auto">
+        <pre className={ classes.pre }>
           <code>{ stack }</code>
         </pre>
       ) }
