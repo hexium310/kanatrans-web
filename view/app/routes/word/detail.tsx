@@ -2,7 +2,7 @@ import { memo, useEffect } from 'react';
 import { useOutletContext } from 'react-router';
 
 import type { Route } from './+types/detail';
-import type { WordOutletContext } from './home';
+import type { AppendWord } from '~/types/word';
 
 export async function loader({ context, params }: Route.LoaderArgs) {
   const katakana = await context.cloudflare.env.KANATRANS_WORKER.katakana(params.word);
@@ -11,11 +11,11 @@ export async function loader({ context, params }: Route.LoaderArgs) {
 }
 
 const Detail = memo(({ params, loaderData }: Route.ComponentProps) => {
-  const { setWords } = useOutletContext<WordOutletContext>();
+  const appendWord = useOutletContext<AppendWord>();
 
   useEffect(() => {
-    setWords((v) => [...v, { word: params.word, katakana: loaderData.katakana, _key: Date.now() }]);
-  }, [setWords, params.word, loaderData.katakana]);
+    appendWord({ word: params.word, katakana: loaderData.katakana, _key: Date.now() });
+  }, [appendWord, params.word, loaderData.katakana]);
 
   return null;
 });

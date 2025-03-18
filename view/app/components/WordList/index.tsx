@@ -1,19 +1,22 @@
 import { Grid } from '@mantine/core';
-import { memo, useCallback, useMemo } from 'react';
+import { memo, useMemo } from 'react';
 
-import type { WordState } from '~/routes/word/home';
 import { History } from './History';
 import { WordCard } from './WordCard';
+import type { Word } from '~/types/word';
 
-export const WordList = memo(({ wordState: [words, setWords] }: { wordState: WordState }) => {
+interface WordListProps {
+  words: Word[],
+  clearHistory: () => void,
+}
+
+export const WordList = memo(({ words, clearHistory }: WordListProps) => {
   const [latest, ...history] = useMemo(
     () => words
       .toReversed()
       .map(({ word, katakana, _key }) => <WordCard key={ _key } word={ word } katakana={ katakana } />),
     [words]
   );
-
-  const clearHistory = useCallback(() => setWords((v) => v.slice(-1)), [setWords]);
 
   return (
     <Grid>
