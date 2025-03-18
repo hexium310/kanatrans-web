@@ -24,3 +24,4 @@ export const History = memo(({ children, clearHistory }: { children: ReactNode, 
     </>
   )
 });
+History.displayName = "History";

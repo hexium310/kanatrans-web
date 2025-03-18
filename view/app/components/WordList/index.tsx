@@ -29,3 +29,4 @@ export const WordList = memo(({ words, clearHistory }: WordListProps) => {
     </Grid>
   );
 });
+WordList.displayName = "WordList";

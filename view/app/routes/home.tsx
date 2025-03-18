@@ -24,5 +24,6 @@ const Home = memo(() => {
     </Container>
   );
 });
+Home.displayName = "Route[/]";
 
 export default Home;

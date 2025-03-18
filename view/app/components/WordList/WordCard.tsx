@@ -42,3 +42,4 @@ export const WordCard = memo(({ word, katakana }: { word: string, katakana: stri
     </Grid.Col>
   )
 });
+WordCard.displayName = "WordCard";

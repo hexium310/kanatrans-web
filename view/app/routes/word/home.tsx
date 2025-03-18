@@ -19,5 +19,6 @@ const Home = memo(() => {
     </>
   );
 });
+Home.displayName = "Route[/word]"
 
 export default Home;

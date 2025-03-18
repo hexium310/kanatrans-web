@@ -27,3 +27,4 @@ export const Menu = memo(({ word }: { word: string }) => {
     </MantineMenu>
   )
 });
+Menu.displayName = "Menu";

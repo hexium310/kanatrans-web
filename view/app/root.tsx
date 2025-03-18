@@ -24,11 +24,13 @@ export const Layout = memo(({ children }: { children: ReactNode }) => {
       </body>
     </html>
   );
-})
+});
+Layout.displayName = "HtmlLayout";
 
 const App = memo(() => {
   return <Outlet />;
 });
+App.displayName = "App";
 
 export const ErrorBoundary = memo(({ error }: Route.ErrorBoundaryProps) => {
   let message = "Oops!";
@@ -58,5 +60,6 @@ export const ErrorBoundary = memo(({ error }: Route.ErrorBoundaryProps) => {
     </main>
   );
 });
+ErrorBoundary.displayName = "ErrorBoundary";
 
 export default App;

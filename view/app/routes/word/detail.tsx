@@ -19,5 +19,6 @@ const Detail = memo(({ params, loaderData }: Route.ComponentProps) => {
 
   return null;
 });
+Detail.displayName = "Route[word/:word]";
 
 export default Detail;

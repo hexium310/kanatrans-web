@@ -41,3 +41,4 @@ export const WordInput = memo(() => {
     </Form>
   );
 });
+WordInput.displayName = "WordInput";
