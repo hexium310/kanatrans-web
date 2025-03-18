@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Outlet } from "react-router";
 
 import { WordList } from "~/components/WordList";
@@ -19,7 +19,7 @@ function useWordState() {
   return useState<Word[]>(() => []);
 }
 
-export default function Home() {
+const Home = memo(() => {
   const [words, setWords] = useWordState();
 
   return (
@@ -28,4 +28,6 @@ export default function Home() {
       <WordList wordState={ [words, setWords] } />
     </>
   );
-}
+});
+
+export default Home;

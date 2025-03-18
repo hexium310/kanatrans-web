@@ -1,12 +1,18 @@
 import { Button, CloseButton, Grid, TextInput } from '@mantine/core';
+import type { MantineStyleProp } from '@mantine/core';
 import { useInputState } from '@mantine/hooks';
+import { memo, useCallback, useMemo } from 'react';
 import { Form, Link } from 'react-router';
 
 import classes from './WordInput.module.css';
 
-export function WordInput() {
+export const WordInput = memo(() => {
   const [word, setWord] = useInputState('');
   const link = `word/${ word }`;
+
+  const handleCloseButtonClick = useCallback(() => setWord(''), [setWord]);
+
+  const closeButtonStyle = useMemo(() => ({ display: word ? undefined : 'none' } satisfies MantineStyleProp), [word]);
 
   return (
     <Form action={ link } method="get">
@@ -20,8 +26,8 @@ export function WordInput() {
             rightSection={
               <CloseButton
                 aria-label="clear input"
-                onClick={ () => setWord('') }
-                style={ { display: word ? undefined : 'none' } }
+                onClick={ handleCloseButtonClick }
+                style={ closeButtonStyle }
               />
             }
           />
@@ -34,4 +40,4 @@ export function WordInput() {
       </Grid>
     </Form>
   );
-}
+});

@@ -1,4 +1,5 @@
 import { Box, Container, Text } from '@mantine/core';
+import { memo } from 'react';
 import { Outlet } from 'react-router';
 
 import { WordInput } from '~/components/WordInput';
@@ -10,7 +11,7 @@ export function meta() {
   ];
 }
 
-export default function Home() {
+const Home = memo(() => {
   return (
     <Container size="md">
       <Box pb={ 16 }>
@@ -22,4 +23,6 @@ export default function Home() {
       <Outlet />
     </Container>
   );
-}
+});
+
+export default Home;

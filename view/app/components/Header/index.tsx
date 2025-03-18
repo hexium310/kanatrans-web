@@ -1,14 +1,15 @@
 import { Anchor, Container, Title } from '@mantine/core';
 import type { IconProps, OcticonProps } from '@primer/octicons-react';
 import { MarkGithubIcon} from '@primer/octicons-react';
-import type { FunctionComponent } from 'react';
+import { memo } from "react";
+import type { FC } from "react";
 import { Link } from 'react-router';
 
 import classes from './Header.module.css';
 
-const GithubIcon: FunctionComponent<IconProps & OcticonProps> = MarkGithubIcon;
+const GithubIcon: FC<IconProps & OcticonProps> = MarkGithubIcon;
 
-export function Header() {
+export const Header = memo(() => {
   return (
     <header className={ classes.header }>
       <Container size="md" className={ classes.inner }>
@@ -21,4 +22,4 @@ export function Header() {
       </Container>
     </header>
   );
-}
+});

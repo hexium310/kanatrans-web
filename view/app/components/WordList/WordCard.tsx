@@ -1,8 +1,9 @@
 import { Card, Grid, Text } from "@mantine/core";
+import { memo } from "react";
 
 import { Menu } from "./Menu";
 
-export function WordCard({ word, katakana }: { word: string, katakana: string }) {
+export const WordCard = memo(({ word, katakana }: { word: string, katakana: string }) => {
   return (
     <Grid.Col span={ 6 }>
       <Card withBorder={ true } shadow="xs" m={ 0 } mt="md">
@@ -40,4 +41,4 @@ export function WordCard({ word, katakana }: { word: string, katakana: string })
       </Card>
     </Grid.Col>
   )
-}
+});

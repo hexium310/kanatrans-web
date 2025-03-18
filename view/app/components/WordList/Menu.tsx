@@ -1,10 +1,13 @@
 import { ActionIcon, Menu as MantineMenu } from "@mantine/core";
 import { useClipboard } from "@mantine/hooks";
 import { CopyIcon, KebabHorizontalIcon } from "@primer/octicons-react";
+import { memo, useCallback } from "react";
 
-export function Menu({ word }: { word: string }) {
+export const Menu = memo(({ word }: { word: string }) => {
   const clipboard = useClipboard();
   const link = `${ window.location.origin }/word/${ word }`;
+
+  const handleCopyClick = useCallback(() => clipboard.copy(link), [clipboard.copy, link]);
 
   return (
     <MantineMenu withinPortal={ true } shadow="sm">
@@ -16,11 +19,11 @@ export function Menu({ word }: { word: string }) {
       <MantineMenu.Dropdown>
         <MantineMenu.Item
           leftSection={ <CopyIcon /> }
-          onClick={ () => clipboard.copy(link) }
+          onClick={ handleCopyClick }
         >
           リンクをコピー
         </MantineMenu.Item>
       </MantineMenu.Dropdown>
     </MantineMenu>
   )
-}
+});

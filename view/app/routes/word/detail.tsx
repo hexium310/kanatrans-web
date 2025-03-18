@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { useOutletContext } from 'react-router';
 
 import type { Route } from './+types/detail';
@@ -10,7 +10,7 @@ export async function loader({ context, params }: Route.LoaderArgs) {
   return { katakana };
 }
 
-export default function Detail({ params, loaderData }: Route.ComponentProps) {
+const Detail = memo(({ params, loaderData }: Route.ComponentProps) => {
   const { setWords } = useOutletContext<WordOutletContext>();
 
   useEffect(() => {
@@ -18,4 +18,6 @@ export default function Detail({ params, loaderData }: Route.ComponentProps) {
   }, [setWords, params.word, loaderData.katakana]);
 
   return null;
-}
+});
+
+export default Detail;

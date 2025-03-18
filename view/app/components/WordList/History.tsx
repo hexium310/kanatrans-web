@@ -1,8 +1,9 @@
 import { ActionIcon, Grid, Group, Text } from "@mantine/core";
 import { TrashIcon } from "@primer/octicons-react";
+import { memo } from "react";
 import type { ReactNode } from "react";
 
-export function History({ children, clearHistory }: { children: ReactNode, clearHistory: () => void }) {
+export const History = memo(({ children, clearHistory }: { children: ReactNode, clearHistory: () => void }) => {
   return (
     <>
       <Grid.Col span={ 12 }>
@@ -22,4 +23,4 @@ export function History({ children, clearHistory }: { children: ReactNode, clear
       { children }
     </>
   )
-}
+});

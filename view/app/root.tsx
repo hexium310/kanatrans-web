@@ -1,4 +1,5 @@
 import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from "@mantine/core";
+import { memo } from "react";
 import type { ReactNode } from "react";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, isRouteErrorResponse } from "react-router";
 
@@ -6,7 +7,7 @@ import type { Route } from "./+types/root";
 
 import '@mantine/core/styles.css';
 
-export function Layout({ children }: { children: ReactNode }) {
+export const Layout = memo(({ children }: { children: ReactNode }) => {
   return (
     <html lang="en" { ...mantineHtmlProps }>
       <head>
@@ -23,13 +24,13 @@ export function Layout({ children }: { children: ReactNode }) {
       </body>
     </html>
   );
-}
+})
 
-export default function App() {
+const App = memo(() => {
   return <Outlet />;
-}
+});
 
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+export const ErrorBoundary = memo(({ error }: Route.ErrorBoundaryProps) => {
   let message = "Oops!";
   let details = "An unexpected error occurred.";
   let stack: string | undefined;
@@ -56,4 +57,6 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
       ) }
     </main>
   );
-}
+});
+
+export default App;
