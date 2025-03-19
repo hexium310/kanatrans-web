@@ -3,5 +3,3 @@ export interface Word {
   katakana: string,
   _key: number,
 }
-
-export type AppendWord = (word: Word) => void;

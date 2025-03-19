@@ -5,7 +5,7 @@ export default [
   layout("layout.tsx", [
     route("/", "routes/home.tsx", [
       route("word", "routes/word/home.tsx", [
-        route(":word", "routes/word/detail.tsx"),
+        route(":word", "routes/word/_word.tsx"),
       ]),
     ]),
   ]),

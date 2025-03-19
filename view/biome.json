@@ -11,6 +11,7 @@
     "rules": {
       "correctness": {
         "useExhaustiveDependencies": {
+          "level": "error",
           "options": {
             "hooks": [
               { "name": "useValidatedState", "stableResult": [1] }
