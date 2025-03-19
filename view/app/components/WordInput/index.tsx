@@ -2,8 +2,8 @@ import { Button, CloseButton, Grid, TextInput } from '@mantine/core';
 import type { MantineStyleProp } from '@mantine/core';
 import { useValidatedState } from '@mantine/hooks';
 import { memo, useCallback, useMemo } from "react";
-import type { ChangeEvent, FormEvent, MouseEvent, MouseEventHandler } from 'react';
-import { Form, Link } from 'react-router';
+import type { ChangeEvent, FormEvent, MouseEventHandler } from 'react';
+import { Form } from 'react-router';
 
 import classes from './WordInput.module.css';
 
@@ -33,7 +33,7 @@ export const WordInput = memo(() => {
 
   const handleInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => setWord(event.target.value), [])
   const handleSubmit = useCallback(
-    (event: MouseEvent<HTMLAnchorElement> | FormEvent<HTMLFormElement>) => !valid && event.preventDefault(),
+    (event: FormEvent<HTMLFormElement>) => !valid && event.preventDefault(),
     [valid]
   );
 
@@ -57,13 +57,7 @@ export const WordInput = memo(() => {
           />
         </Grid.Col>
         <Grid.Col span={ 4 }>
-          <Button
-            fullWidth={ true }
-            component={ Link }
-            to={ link }
-            data-disabled={ !valid }
-            onClick={ handleSubmit }
-          >
+          <Button type="submit" fullWidth={ true } disabled={ !valid }>
             変換
           </Button>
         </Grid.Col>
