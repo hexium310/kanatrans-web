@@ -1,9 +1,9 @@
 import { Grid } from '@mantine/core';
 import { memo, useMemo } from 'react';
 
+import type { Word } from '~/types/word';
 import { History } from './History';
 import { WordCard } from './WordCard';
-import type { Word } from '~/types/word';
 
 interface WordListProps {
   words: Word[],

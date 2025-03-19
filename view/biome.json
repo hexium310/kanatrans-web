@@ -6,5 +6,18 @@
   },
   "formatter": {
     "enabled": false
+  },
+  "linter": {
+    "rules": {
+      "correctness": {
+        "useExhaustiveDependencies": {
+          "options": {
+            "hooks": [
+              { "name": "useValidatedState", "stableResult": [1] }
+            ]
+          }
+        }
+      }
+    }
   }
 }

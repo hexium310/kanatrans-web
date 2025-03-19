@@ -1,8 +1,8 @@
 import { memo, useEffect } from 'react';
 import { useOutletContext } from 'react-router';
 
-import type { Route } from './+types/detail';
 import type { AppendWord } from '~/types/word';
+import type { Route } from './+types/detail';
 
 export async function loader({ context, params }: Route.LoaderArgs) {
   const katakana = await context.cloudflare.env.KANATRANS_WORKER.katakana(params.word);
