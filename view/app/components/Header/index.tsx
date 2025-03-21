@@ -1,4 +1,4 @@
-import { Anchor, Container, Title } from '@mantine/core';
+import { Anchor, Container, Title, Tooltip } from '@mantine/core';
 import type { IconProps, OcticonProps } from '@primer/octicons-react';
 import { MarkGithubIcon} from '@primer/octicons-react';
 import { memo } from "react";
@@ -16,9 +16,11 @@ export const Header = memo(() => {
         <Link to="/" className={ classes.title }>
           <Title order={ 1 }>kanatrans</Title>
         </Link>
-        <Anchor href="https://github.com/hexium310/kanatrans-web" target="_blank" className={ classes.link }>
-          <GithubIcon size="medium" aria-labelledby="title" title="hexium310/kanatrans-web" />
-        </Anchor>
+        <Tooltip label="このページのソースコード" fz="xs">
+          <Anchor href="https://github.com/hexium310/kanatrans-web" target="_blank" className={ classes.link }>
+            <GithubIcon size="medium" aria-labelledby="title" title="hexium310/kanatrans-web" />
+          </Anchor>
+        </Tooltip>
       </Container>
     </header>
   );
