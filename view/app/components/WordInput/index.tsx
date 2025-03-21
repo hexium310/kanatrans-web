@@ -40,12 +40,13 @@ export const WordInput = memo(() => {
   const handleInputClearButtonClick = useCallback(() => setWord(''), []);
 
   return (
-    <Form action={ link } method="get" onSubmit={ handleSubmit }>
+    <Form action={ link } method="get" onSubmit={ handleSubmit } className={ classes["word-input-form"] }>
       <Grid>
         <Grid.Col span={ 8 }>
           <TextInput
             autoComplete="off"
             value={ word }
+            placeholder="word"
             onChange={ handleInputChange }
             className={ word ? '' : classes['right-section-hidden'] }
             rightSection={

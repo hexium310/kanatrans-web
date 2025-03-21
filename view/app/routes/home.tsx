@@ -1,8 +1,10 @@
-import { Box, Container, Text } from '@mantine/core';
+import { Box, Card, Container, Group, Text } from '@mantine/core';
+import { InfoIcon } from '@primer/octicons-react';
 import { memo } from 'react';
 import { Outlet } from 'react-router';
 
 import { WordInput } from '~/components/WordInput';
+import { Workings } from '~/components/Workings';
 
 export function meta() {
   return [
@@ -14,9 +16,13 @@ export function meta() {
 const Home = memo(() => {
   return (
     <Container size="md">
-      <Box pb={ 16 }>
+      <Box>
+        <Workings />
         <Text>
           カタカナに変換したい英単語を入力し、変換ボタンを押してください。
+        </Text>
+        <Text>
+          使用可能文字 a-z、A-Z、_
         </Text>
       </Box>
       <WordInput />
