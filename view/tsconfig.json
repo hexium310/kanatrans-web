@@ -1,0 +1,15 @@
+{
+  "files": [],
+  "exclude": ["./.react-router/types/+register.ts"],
+  "references": [
+    { "path": "./tsconfig.node.json" },
+    { "path": "./tsconfig.cloudflare.json" }
+  ],
+  "compilerOptions": {
+    "checkJs": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true
+  }
+}

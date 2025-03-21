@@ -1,0 +1,41 @@
+{
+  "name": "view",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:view": "react-router build",
+    "deploy:view": "npm run build && wrangler deploy",
+    "dev:view": "react-router dev",
+    "start:view": "wrangler dev --local --env development --port 3000",
+    "lint:typecheck:view": "react-router typegen && tsc -b",
+    "lint:biome:view": "biome check ."
+  },
+  "dependencies": {
+    "@mantine/core": "^7.17.2",
+    "@mantine/hooks": "^7.17.2",
+    "@primer/octicons-react": "^19.15.1",
+    "@react-router/node": "^7.3.0",
+    "@react-router/serve": "^7.3.0",
+    "isbot": "^5.1.25",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router": "^7.3.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@cloudflare/workers-types": "^4.20250317.0",
+    "@react-router/dev": "^7.3.0",
+    "@types/node": "^22.13.10",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "concurrently": "^9.1.2",
+    "kanatrans-wasm": "workspace:^",
+    "postcss": "^8.5.3",
+    "postcss-preset-mantine": "^1.17.0",
+    "postcss-simple-vars": "^7.0.1",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.2",
+    "vite-tsconfig-paths": "^5.1.4",
+    "wrangler": "^4.0.0"
+  }
+}

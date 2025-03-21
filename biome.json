@@ -23,6 +23,12 @@
       "all": true,
       "correctness": {
         "useImportExtensions": "off"
+      },
+      "style": {
+        "noDefaultExport": "off"
+      },
+      "suspicious": {
+        "noReactSpecificProps": "off"
       }
     }
   },
@@ -30,6 +36,6 @@
     "formatter": {
       "quoteStyle": "single"
     },
-    "globals": ["ExecutionContext"]
+    "globals": ["ExecutionContext", "ExportedHandler"]
   }
 }

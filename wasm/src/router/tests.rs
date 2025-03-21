@@ -3,7 +3,7 @@ use http::StatusCode;
 use problem_details::ProblemDetails;
 use service::Router as AxumRouter;
 
-use crate::{output::Output, Router};
+use crate::{rest::RestOutput, Router};
 
 fn axum_router() -> AxumRouter {
     AxumRouter::new()
@@ -17,7 +17,7 @@ async fn ok() {
 
     let output = router.apply("/success").await;
 
-    assert_eq!(output, Output::Success("success".into()));
+    assert_eq!(output, RestOutput::Success("success".into()));
 }
 
 #[tokio::test(flavor = "current_thread")]
@@ -26,7 +26,7 @@ async fn internal_server_error() {
 
     let output = router.apply("/failure").await;
 
-    assert_eq!(output, Output::Failure(ProblemDetails::from_status_code(StatusCode::INTERNAL_SERVER_ERROR)));
+    assert_eq!(output, RestOutput::Failure(ProblemDetails::from_status_code(StatusCode::INTERNAL_SERVER_ERROR)));
 }
 
 #[tokio::test(flavor = "current_thread")]
@@ -35,7 +35,7 @@ async fn not_found() {
 
     let output = router.apply("/does-not-exist").await;
 
-    assert_eq!(output, Output::Failure(ProblemDetails::from_status_code(StatusCode::NOT_FOUND)));
+    assert_eq!(output, RestOutput::Failure(ProblemDetails::from_status_code(StatusCode::NOT_FOUND)));
 }
 
 #[tokio::test(flavor = "current_thread")]
@@ -44,5 +44,5 @@ async fn bad_request() {
 
     let output = router.apply("").await;
 
-    assert_eq!(output, Output::Failure(ProblemDetails::from_status_code(StatusCode::BAD_REQUEST).with_detail("empty string")));
+    assert_eq!(output, RestOutput::Failure(ProblemDetails::from_status_code(StatusCode::BAD_REQUEST).with_detail("empty string")));
 }

@@ -1,0 +1,9 @@
+.right-section-hidden {
+  & [data-position="right"] {
+    display: none;
+  }
+}
+
+.word-input-form {
+  margin-top: 8px;
+}
