@@ -16,7 +16,7 @@
     "@cloudflare/workers-types": "^4.20250404.0",
     "@cloudflare/workers-wasi": "^0.0.5",
     "http-problem-details": "^0.1.7",
-    "typescript": "5.8.2",
+    "typescript": "5.8.3",
     "wrangler": "^4.7.1"
   }
 }
