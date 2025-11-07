@@ -303,7 +303,7 @@ dependencies = [
  "axum",
  "http",
  "http-body-util",
- "problem_details",
+ "problem_details 0.9.0",
  "serde",
  "serde_json",
  "service",
@@ -402,6 +402,18 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "777f7cf33eca7f41687a047c133ec7df9a03b13757a2666062d8b9cfa446e397"
 dependencies = [
  "axum",
+ "http",
+ "http-serde",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "problem_details"
+version = "0.9.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d50e8b46a2f32e61ae82888734e24627ea0f8c9bc7c5fc8d0c3e0eb7ed0ff5ab"
+dependencies = [
  "http",
  "http-serde",
  "serde",
@@ -549,7 +561,7 @@ dependencies = [
  "anyhow",
  "axum",
  "domain",
- "problem_details",
+ "problem_details 0.8.0",
  "serde",
  "serde_json",
  "thiserror",
