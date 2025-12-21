@@ -9,7 +9,7 @@ tag = "kanatrans/0.2.6"
 features = ["vendored"]
 
 [dependencies.http]
-version = "1.3.1"
+version = "1.4.0"
 
 [dependencies.http-body-util]
 version = "0.1.3"
