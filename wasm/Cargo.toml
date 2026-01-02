@@ -21,7 +21,7 @@ version = "0.8.0"
 version = "1.0.228"
 
 [dependencies.serde_json]
-version = "1.0.147"
+version = "1.0.148"
 
 [dependencies.service]
 git = "https://github.com/hexium310/kanatrans"
