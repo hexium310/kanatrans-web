@@ -28,7 +28,7 @@ git = "https://github.com/hexium310/kanatrans"
 tag = "kanatrans/0.2.6"
 
 [dependencies.tokio]
-version = "1.48.0"
+version = "1.49.0"
 features = ["rt", "macros"]
 
 [dependencies.tower]
