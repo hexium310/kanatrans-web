@@ -32,7 +32,7 @@ version = "1.49.0"
 features = ["rt", "macros"]
 
 [dependencies.tower]
-version = "0.5.2"
+version = "0.5.3"
 features = ["util"]
 
 [dev-dependencies.axum]
