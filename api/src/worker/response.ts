@@ -4,7 +4,7 @@ import type { ProblemDocumentOptions } from 'http-problem-details/dist/ProblemDo
 import type { OutputStreamReadResult } from '@/types/output';
 
 export const buildResponse = (output: OutputStreamReadResult, error: OutputStreamReadResult): Response => {
-  if (error.value.byteLength > 0) {
+  if (!error.done && error.value.byteLength > 0) {
     const message = new TextDecoder().decode(error.value);
 
     return responseFromProblemDetails({
