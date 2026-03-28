@@ -13,7 +13,7 @@ export const execWasi = (
   const stderr = new TransformStream<Uint8Array, Uint8Array>();
   const wasi = new WASI({
     args: ['', request.url],
-    stdin: request.body,
+    stdin: request.body ?? undefined,
     stdout: stdout.writable,
     stderr: stderr.writable,
   });
