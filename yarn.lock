@@ -151,10 +151,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudflare/workers-types@npm:^4.20260410.1":
-  version: 4.20260410.1
-  resolution: "@cloudflare/workers-types@npm:4.20260410.1"
-  checksum: 10c0/c66f898194f179d043134b41f109f2f103d95d03440e409214f509ab08cfe7bd045990df86de1cd1dcea82a46fe866c36a4cfee150c905780524f6701fa75167
+"@cloudflare/workers-types@npm:^4.20260501.1":
+  version: 4.20260501.1
+  resolution: "@cloudflare/workers-types@npm:4.20260501.1"
+  checksum: 10c0/f87bc7b4b753bbe6c19e1226125d2516e9f9143bfccd4c39c00a0fb86e4021e62f587c607173cf4bffb16270b6c160cdf128728e4dbcabb8f58a672a50f8923e
   languageName: node
   linkType: hard
 
@@ -760,7 +760,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "api@workspace:api"
   dependencies:
-    "@cloudflare/workers-types": "npm:^4.20260410.1"
+    "@cloudflare/workers-types": "npm:^4.20260501.1"
     "@cloudflare/workers-wasi": "npm:^0.0.5"
     http-problem-details: "npm:^0.1.7"
     kanatrans-wasm: "workspace:^"
