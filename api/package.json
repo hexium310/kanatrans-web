@@ -13,7 +13,7 @@
     "kanatrans-wasm": "workspace:^"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^5.20260724.1",
+    "@cloudflare/workers-types": "^5.20260728.1",
     "@cloudflare/workers-wasi": "^0.0.5",
     "http-problem-details": "^0.1.7",
     "typescript": "6.0.3",
