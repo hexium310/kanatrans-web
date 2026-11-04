@@ -1,0 +1,20 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "github>hexium310/renovate-config",
+    "github>hexium310/renovate-config:labels"
+  ],
+  "packageRules": [
+    {
+      "groupName": "kanatrans",
+      "matchManagers": "cargo",
+      "matchPackageNames": [
+        "adapter",
+        "service"
+      ],
+      "minimumGroupSize": 2,
+      "separateMajorMinor": false
+    }
+  ]
+}
