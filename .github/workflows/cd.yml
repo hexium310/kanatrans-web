@@ -15,7 +15,7 @@ jobs:
       WASI_SDK_PATH: /opt/wasi-sdk/
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4.4.0
         with:
           submodules: true
       - name: Enable corepack
@@ -25,11 +25,11 @@ jobs:
         with:
           targets: wasm32-wasip1
       - name: Set up WASI SDK
-        uses: ./.github/actions/set-up-wasi-sdk
+        uses: $/.github/actions/set-up-wasi-sdk
         with:
           path: ${{ env.WASI_SDK_PATH }}
       - name: Cache dependencies
-        uses: Swatinem/rust-cache@v2
+        uses: Swatinem/rust-cache@v2.9.3
         with:
           cache-on-failure: true
       - name: Install dependencies
@@ -42,6 +42,6 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: yarn deploy:api
       - name: release
-        uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@v2.6.2
         with:
           files: target/wasm32-wasip1/release/kanatrans-wasm.wasm
