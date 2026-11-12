@@ -9,7 +9,7 @@ workflows:
     '.github/workflows/cd.yml':
         - 'actions/checkout@v7.0.1'
         - 'dtolnay/rust-toolchain@stable'
-        - 'softprops/action-gh-release@v2.6.2'
+        - 'softprops/action-gh-release@v3.0.4'
         - 'swatinem/rust-cache@v2.9.3'
     '.github/workflows/ci.yml':
         - 'actions/checkout@v7.0.1'
@@ -57,9 +57,9 @@ dependencies:
         commit: 'sha1-87e08e0c289f2654fe702b0aaf88c2f1027a3e57'
         owner_id: 23310673
         repo_id: 438764573
-    'softprops/action-gh-release@v2.6.2':
-        ref: 'v2.6.2'
-        commit: 'sha1-3bb12739c298aeb8a4eeaf626c5b8d85266b0e65'
+    'softprops/action-gh-release@v3.0.4':
+        ref: 'v3.0.4'
+        commit: 'sha1-8a0cd651e5b2365bd640854a3fa5dfc70e4875f3'
         owner_id: 2242
         repo_id: 204253808
     'swatinem/rust-cache@v2.9.3':
